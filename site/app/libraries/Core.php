@@ -46,6 +46,9 @@ class Core {
     /** @var DebugStack */
     private $course_debug_stack;
 
+    /** @var Metrics */
+    private $metrics;
+
     /** @var AbstractAuthentication */
     private $authentication;
 
@@ -91,6 +94,7 @@ class Core {
     public function __construct() {
         $this->setOutput(new Output($this));
         $this->access = new Access($this);
+        $this->metrics = new Metrics($this);
 
         // initialize our alert queue if it doesn't exist
         if (!isset($_SESSION['messages'])) {
@@ -110,6 +114,10 @@ class Core {
             $_REQUEST[$key] = (isset($_REQUEST[$key])) ? strtolower($_REQUEST[$key]) : "";
         }
         $this->notification_factory = new NotificationFactory($this);
+    }
+
+    public function metrics() {
+        return $this->metrics;
     }
 
     /**

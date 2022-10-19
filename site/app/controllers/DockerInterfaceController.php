@@ -22,6 +22,7 @@ class DockerInterfaceController extends AbstractController {
      * @return MultiResponse
      */
     public function showDockerInterface(): MultiResponse {
+        $this->core->metrics()->log("docker_interface_controller");
         $user = $this->core->getUser();
         if (is_null($user) || !$user->accessFaculty()) {
             return new MultiResponse(

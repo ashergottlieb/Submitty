@@ -236,6 +236,7 @@ class WebRouter {
         $this->controller_name = $this->parameters['_controller'];
         $this->method_name = $this->parameters['_method'];
         $controller = new $this->controller_name($this->core);
+        $this->core->metrics()->setEndpoint($this->controller_name, $this->method_name);
 
         $arguments = [];
         /** @noinspection PhpUnhandledExceptionInspection */
